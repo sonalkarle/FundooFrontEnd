@@ -1,0 +1,81 @@
+<div class="outer">
+    <div class="inner">
+      <div class="div-form">
+        <div class="FunDooNotes">
+          <div>
+            <span class="color-fundoo-F" style="color:#4285F4">F</span>
+            <span class="color-fundoo" style="color:#4285F4">un</span>
+            <span class="color-fundoo" style="color:#EA4335">doo</span>
+            <span class="color-fundoo" style="color:#FBBC05">n</span>
+            <span class="color-fundoo" style="color:#4285F4">o</span>
+            <span class="color-fundoo" style="color:#34A853">t</span>
+            <span class="color-fundoo" style="color:#EA4335">e</span>
+            <span class="color-fundoo" style="color:#4285F4">s</span>
+          </div>
+          <br>
+                <span class= "Create" style="font-size:x-large;">Create your FunDoo Account</span>
+        </div>
+        <div class="div-icon">
+            <div class="dash">
+              <img class="dash-icon" width="244" height="244" id="" src="../../assets/account.svg">
+            </div>
+            <div>
+              <span class="dasp-span">One account. All of FunDoo</span>
+            </div>
+            <div>
+              <span class="Dbsp-span">working for you.</span>
+            </div>
+          </div>
+        <form id="RegisterForm" class="RegisterForm" [formGroup]="registerForm" (ngSubmit)=" registerForm.valid && register()" >
+            <div id="form-container" class="form-container"> 
+              <div class="name form-item ">
+                <div class="name-f">
+                        <mat-form-field class="fname" appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input matInput placeholder="" name ="firstname" formcontrolName="firstname">
+                        </mat-form-field>
+                </div>
+  <div class ="name-1">
+  <mat-form-field class= "laname" appearance="outline">
+    <mat-label>Last Name</mat-label>
+    <input matInput placeholder="" name ="lastName" formcontrolName = "lastName">
+  </mat-form-field>
+  </div>
+              </div>
+              <div class="email form-item">
+                <mat-form-field class="username" appearance="outline">
+                  <mat-label >Username</mat-label>
+                  <input matInput placeholder="" name="email" formControlName="email">
+                  <span class="input-suffix" matSuffix >@gmail.com</span>
+                  <mat-hint>You can use letters, numbers & periods</mat-hint>
+                </mat-form-field>
+              </div> 
+
+             
+ 
+  <div class = "password form-item">
+    <mat-form-field class= "new-password" appearance="outline">
+        <mat-label>Enter password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'">
+    </mat-form-field>
+    
+        <mat-form-field class= "confirm-password" appearance="outline">
+            <mat-label>Confirm password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'">
+        </mat-form-field>
+        <mat-hint class="pass-hint"  >Use 8 or more characters with a mix of letters, numbers at least 1 uppercase, 1 digit & 1 symbol</mat-hint>
+  </div>
+  <div class = "Show - password form-item">
+      <section class="">
+        <mat-checkbox color="primary" class="Show-password" (change)="hide = hide ? false : true"  >Show password</mat-checkbox>
+      </section>
+  </div>
+     
+    
+        <button class = "btns" type="submit" mat-raised-button color = "blue">Next</button>
+
+     
+  </div>
+
+   
+  
