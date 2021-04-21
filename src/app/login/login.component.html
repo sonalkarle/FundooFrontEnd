@@ -23,9 +23,9 @@
         <div class="email">
           <mat-form-field class="user" appearance="outline">
             <mat-label >Email</mat-label>
-            <input matInput placeholder="" formControlName="email">
+            <input matInput placeholder="" formControlName="Email">
             <span class="input-suffix" matSuffix >@gmail.com</span>
-            <mat-error *ngIf="loginForm.hasError('required', 'email')">
+            <mat-error *ngIf="loginForm.hasError('required', 'Email')">
               *Required
             </mat-error>
             <mat-hint>You can use letters, numbers & periods</mat-hint>
@@ -34,8 +34,8 @@
         <div class="password">
           <mat-form-field class="pass" appearance="outline">
             <mat-label >Password</mat-label>
-            <input type="password" id="password" type="{{ isActive ? 'password' : 'text' }}" matInput placeholder="" formControlName="password">
-            <mat-error *ngIf="loginForm.hasError('required', 'password')">
+            <input type="password" id="password" type="{{ isActive ? 'password' : 'text' }}" matInput placeholder="" formControlName="Password">
+            <mat-error *ngIf="loginForm.hasError('required', 'Password')">
               Please enter your password
             </mat-error>
             <mat-hint class="pass-hint"  >Use 8 or more characters with a mix of letters, numbers at least 1 uppercase, 1 digit & 1 symbol

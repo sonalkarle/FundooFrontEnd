@@ -93,8 +93,8 @@ register() {
     let reqData ={
       FirstName: this.registerForm.get('FirstName')?.value,
       LastName: this.registerForm.get('LastName')?.value,
-      DateOfBirth:"1997-03-18",
-      PhoneNumber:"8805956103",
+      DateOfBirth:"1998-01-31",
+      PhoneNumber:"9702420754",
       Email: this.registerForm.get('Email')?.value+this.Email,
       Password: this.registerForm.get('Password')?.value,
       

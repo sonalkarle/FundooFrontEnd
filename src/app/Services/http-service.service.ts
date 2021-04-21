@@ -10,8 +10,6 @@ export class HttpServiceService {
   baseUrl = environment.BaseUrl
   post(url:any, data:any){
     console.log("http called");
-    return this.HttpCl.post(this.baseUrl  + url,data);
-
-   
+    return this.HttpCl.post(this.baseUrl  + url,data);  
 }
 }

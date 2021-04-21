@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import{UserserviceService} from 'src/app/Services/Userservice/userservice.service'
+import {MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-resetpassword',
@@ -9,18 +11,20 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 })
 export class ResetpasswordComponent implements OnInit {
 
-  
-  public isActive: boolean;
   public token: string;
-  resetPassword:FormGroup;
-  action: boolean = false;
-  setAutoHide: boolean = false;
 
-  constructor(private formBuilder:FormBuilder) { 
+  resetPassword:FormGroup
+
+  public isActive: boolean;
+
+public Email: string = '@gmail.com';
+
+  constructor(private formBuilder:FormBuilder, public snackBar: MatSnackBar ,private userService:UserserviceService ) 
+     { 
     
     this.resetPassword = this.formBuilder.group(
     {
-      password:  new FormControl('', [Validators.required, 
+      newPassword:  new FormControl('', [Validators.required, 
         Validators.pattern('^(?=.{8,20}$)(?=.*[\\d])(?=.*[A-Z])[\\w]*[\\W][\\w]*$')
       ]),
       confirmPassword:  new FormControl('', [Validators.required, 
@@ -32,22 +36,52 @@ export class ResetpasswordComponent implements OnInit {
     this.token = '';
   } 
   
-
-  checkPasswords(group: FormGroup) {
-    let pass = group.controls.password.value;
-    let confirmPass = group.controls.confirmPassword.value;
   
-    return pass === confirmPass ? null : { notSame: true }
+  ngOnInit(): void {}  
+  openSnackBar(message: string, duration: number) {
+    let config = new MatSnackBarConfig();
+    if (duration != 0)
+    {
+      config.duration = duration; 
+    }
+    this.snackBar.open(message, undefined, config);
+  }  
+
+  
+  checkPasswords(group: FormGroup) {
+    let newPassword = group.controls.newPassword.value;
+    let confirmPassword = group.controls.confirmPassword.value;
+  
+    return newPassword === confirmPassword ? null : { notSame: true }
   }
   TogglePassword(){
     this.isActive = this.isActive ? false : true 
   }
-  ngOnInit(): void {
-
-    
-  }
-  
   ResetPassword(){
+    if(this.resetPassword.valid){
+      this.openSnackBar(' reset...', 0);
+      let reqData ={
+        newPassword: this.resetPassword.get('newPassword')?.value,
+        confirmPassword: this.resetPassword.get('confirmPassword')?.value
+      }
+      this.userService.resetUser(reqData).subscribe(
+        (response: any) => {
+          this.openSnackBar('password reset is successful', 2000);
+        },
+        error => {
+          try {
+            if(error['status'] == 0){
+              this.openSnackBar('Reset failed: server offline', 2000,);
+            }
+            else{
+              this.openSnackBar('Reset failed: '+error['error']['message'], 2000,);
+            }
+            } catch (error) {
+
+          }
+        });
+    } 
+
   
   }
 }
