@@ -1,0 +1,19 @@
+<div class="note">
+    <mat-card [id]="'note-'+childMessage.noteId" class="note-d note-before" ng-class="">
+        <div id="dntn" class="nd" (click)="updateNoteProcess()" >
+            <div id="title" #title  contenteditable="false" aria-multiline="true" role="textbox" class="t n1" dir="ltr">{{ childMessage['title'] }}</div>
+            <div id="note" contenteditable="false" aria-multiline="true" role="textbox" class="n n1" >{{ childMessage['text'] }}</div>
+            
+        </div>
+        <div class="bot">
+            <div class="tool" role="toolbar">
+                <div role="button" class=" reminder prop" tabindex="0" aria-label="Remind me" matTooltip="Remind me" matTooltipClass="prop-tip" matTooltipPosition='below'></div>
+                <div role="button" class="collaborator prop" tabindex="0" aria-label="Collaborator" matTooltip="Collaborator" matTooltipClass="prop-tip" matTooltipPosition='below'></div>
+                <div role="button" class=" back-color prop" tabindex="0" aria-label="Change color" matTooltip="Change color" matTooltipClass="prop-tip" matTooltipPosition='below'></div>
+                <div role="button" class="back-image prop" tabindex="0" aria-label="Add image" matTooltip="Add image" matTooltipClass="prop-tip" matTooltipPosition='below'></div>
+                <div role="button" class="archive prop" tabindex="0" aria-label="Archive" matTooltip="Archive" matTooltipClass="prop-tip" matTooltipPosition='below'></div>
+                <div role="button" id="moremenu" (click)="move($event)" class="prop more" tabindex="0" aria-label="More" matTooltip="More" matTooltipClass="prop-tip" matTooltipPosition='below'></div>
+            </div>
+        </div>
+    </mat-card>
+</div>

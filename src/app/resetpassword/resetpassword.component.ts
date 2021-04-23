@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import{UserserviceService} from 'src/app/Services/Userservice/userservice.service'
 import {MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
+import { Router, RouterStateSnapshot, ActivatedRoute, Params  } from '@angular/router';
+
 
 
 @Component({
@@ -19,7 +21,7 @@ export class ResetpasswordComponent implements OnInit {
 
 public Email: string = '@gmail.com';
 
-  constructor(private formBuilder:FormBuilder, public snackBar: MatSnackBar ,private userService:UserserviceService ) 
+  constructor(private formBuilder:FormBuilder, public snackBar: MatSnackBar ,private userService:UserserviceService ,private activatedRoute: ActivatedRoute) 
      { 
     
     this.resetPassword = this.formBuilder.group(
@@ -37,7 +39,11 @@ public Email: string = '@gmail.com';
   } 
   
   
-  ngOnInit(): void {}  
+  ngOnInit(): void {  this.activatedRoute.params.subscribe(params => {
+    this.token = params['token'];
+    console.log(this.token);
+    localStorage.setItem('FunDooNotesJWT', this.token);
+  });}  
   openSnackBar(message: string, duration: number) {
     let config = new MatSnackBarConfig();
     if (duration != 0)
@@ -68,7 +74,7 @@ public Email: string = '@gmail.com';
         (response: any) => {
           this.openSnackBar('password reset is successful', 2000);
         },
-        error => {
+        (error:any) => {
           try {
             if(error['status'] == 0){
               this.openSnackBar('Reset failed: server offline', 2000,);

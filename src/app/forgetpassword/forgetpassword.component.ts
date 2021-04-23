@@ -49,7 +49,7 @@ export class ForgetpasswordComponent implements OnInit {
         (response: any) => {
           this.openSnackBar('password reset link has been sent to your registered email', 2000);
         },
-        error => {
+        (error:any) => {
           if(error['status'] == 0){
             this.openSnackBar('Sending password reset link failed: server offline', 2000,);
           }

@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, FormControl, Validators,} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import {
   MatSnackBarConfig,
 MatSnackBarHorizontalPosition,
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
  
  
   constructor(private formBuilder:FormBuilder,private Userservice:UserserviceService,
-    public snackBar: MatSnackBar) { 
+    public snackBar: MatSnackBar, private route: Router) { 
     this.loginForm = this.formBuilder.group(
       {
         Email: new FormControl('', [Validators.required, 
@@ -61,9 +62,9 @@ export class LoginComponent implements OnInit {
         (response: any) => {
           localStorage.setItem('FunDooJwt', response['token']);
           this.openSnackBar('Login success', 2000);
-         
+          this.route.navigate(['Dashboard']);
         },
-        error => {
+        (error:any) => {
           try {
             if(error['status'] == 0){
               this.openSnackBar('Login failed: server offline', 2000,);

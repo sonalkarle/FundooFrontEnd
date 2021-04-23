@@ -15,6 +15,17 @@ import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.compone
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import {MatCardModule} from '@angular/material/card';
+import { CreateNoteComponent } from './create-note/create-note.component';
+import { DisplayNotesComponent } from './display-notes/display-notes.component';
+import { AuthGuard } from '../app/authGaurd/auth.guard';
+
+
 
 
 
@@ -24,7 +35,10 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     RegisterComponent,
     LoginComponent,
     ForgetpasswordComponent,
-    ResetpasswordComponent
+    ResetpasswordComponent,
+    DashboardComponent,
+    CreateNoteComponent,
+    DisplayNotesComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +51,12 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatMenuModule,
+    MatCardModule
    
   ],
   providers: [],

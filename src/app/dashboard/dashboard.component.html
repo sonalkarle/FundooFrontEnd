@@ -1,0 +1,132 @@
+
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
+  <mat-toolbar >
+      <mat-toolbar-row style="background-color: white;">
+        <button mat-icon-button>
+          <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+        </button>
+        <!-- <hr style=" top: 56.5px; position: absolute; "  size="0"  width="105%" color="grey"> -->
+
+          <img class="logo" src="../../assets/1200px-Google_Keep_icon_(2020).svg.png" width="30px" height="38px">
+          <div class="keep" style="font-size: 23px; font-family:'Roboto',arial,sans-serif; color: rgb(119, 115, 115);">
+            FundooNotes
+            </div>
+        <div >
+        <mat-form-field class="mat-form-field" appearance="outline" style="width: 600px; font-size: 3px; box-shadow: black;">
+          <!-- <button  mat-button style="right: 7px; width: 1px; "  >
+              <img class="searchicon" src="../../assets/95ee408c19f2c9d10629b70c4cea3e51.jpg" style="width: 40px; left: 0px; ">
+         </button> -->
+            <input class="search" matInput  [(ngModel)]="value">
+            <button class="closeicon" mat-button aria-label="Close"  (click)="value=''">
+              <span aria-hidden="true" style="font-size: 23px; color: rgb(100, 96, 96);"> × </span>
+         </button>
+        </mat-form-field>
+        </div>
+     
+      </mat-toolbar-row>
+      
+    </mat-toolbar>
+    
+    
+    <mat-sidenav-container class="example-sidenav-container"
+                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+      <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+        <mat-nav-list>
+
+          
+    
+          <a mat-list-item  ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6A4.997 4.997 0 0 1 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"></path>
+          </svg> <span class="notes">Note</span>  </a>
+          
+          <a mat-list-item  >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M18 17v-6c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v6H4v2h16v-2h-2zm-2 0H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6zm-4 5c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2z"></path></svg>
+          <span class="notes">Reminders</span>  </a>
+
+          <a mat-list-item >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.54 5.23l-1.39-1.68C18.88 3.21 18.47 3 18 3H6c-.47 0-.88.21-1.16.55L3.46 5.23C3.17 5.57 3 6.02 3 6.5V19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6.5c0-.48-.17-.93-.46-1.27zM6.24 5h11.52l.83 1H5.42l.82-1zM5 19V8h14v11H5zm11-5.5l-4 4-4-4 1.41-1.41L11 13.67V10h2v3.67l1.59-1.59L16 13.5z"></path></svg>
+              <span class="notes">Archive</span>  
+          </a>
+           
+          <a mat-list-item >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13z"></path><path d="M9 8h2v9H9zm4 0h2v9h-2z"></path></svg>
+          <span class="notes">Bin</span>
+          </a>
+          
+        </mat-nav-list>
+      <!-- </mat-sidenav>
+      <mat-sidenav-content>
+        <div style="height: 88vh;">
+         
+          <app-note></app-note>
+          <router-outlet></router-outlet>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+   -->
+
+
+
+  </mat-sidenav>
+  <mat-sidenav-content class="container">
+
+
+    <!-- Communication between child(note.component) and parent  -->
+    <div class="note-create">
+      <app-create-note  ></app-create-note>
+    </div>
+
+
+
+
+ <!-- Communication between child(displaynote.component) and parent  -->
+    <div class="out">
+      <div class="display-notes">
+        <app-display-notes (messageEvent)="receiveMessage($event)"   (messageEvent)="receiveNoteMessage($event)" *ngFor="let content of notes" [childMessage]="content" [id]="'notes'+content['noteId']"></app-display-notes>
+        <mat-card *ngIf="more" [style.top.px]="top" [style.left.px]="left" class="moremenu" aria-hidden="false" role="menu" aria-haspopup="true" tabindex="0">
+          <div class="delete-more menu-more" (click)="deleteNote()" role="menuitem" id=":1" style="user-select: none;">
+              <div class="menu-list delete-note" style="user-select: none;">Delete note</div>
+          </div>
+          <div class="menu-more" role="menuitem" id=":2" style="user-select: none;">
+              <div class="" style="user-select: none;">Add label</div>
+          </div >
+      </mat-card>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+    
+</div>
+<div class="note-update" *ngIf="updating" (loaded)="focusNote()">
+  <!-- <app-note-update [updateNote]="updateNote" class="note-u"></app-note-update> -->
+  <mat-card class="dis-note" >
+    <div class="tn">
+        <div class="tp">
+            <div id="up-title" contenteditable="true" data-placeholder="Title" aria-multiline="true" role="textbox" class="notranslate un-t" tabindex="0" spellcheck="true" aria-label="Title" >{{updateNote['title']}}</div>
+            <div  role="button" class="u-pin" tabindex="0" aria-label="Pin note" aria-pressed="false" style="user-select: none;" autofocus></div>  
+        </div>
+        <div id="upnote" name="upnotename" contenteditable="true" data-placeholder="Note" aria-multiline="true" role="textbox" class="un-n" tabindex="1" spellcheck="true" aria-label="Note" #upnote>{{ updateNote['body'] }}</div>
+      </div>
+    <div class="nu-bottom" id="bottom" >
+        <div class="nu-prop">
+            <div class="reminder prop" role="button"  matTooltip="Remind me" matTooltipClass="prop-tip" matTooltipPosition='below'></div>
+            <div class="collaborator prop" role="button" matTooltip="Collaborator" matTooltipPosition='below'></div>
+            <div class="back-color prop" role="button" matTooltip="change color" matTooltipPosition='below'></div>
+            <div class="back-image prop" role="button" matTooltip="Add image" matTooltipPosition='below'></div>
+            <div class="archive prop" role="button" matTooltip="Archive" matTooltipPosition='below'></div>
+            <div class="more prop" role="button" matTooltip="More" matTooltipPosition='below'></div>
+            <div class="undo prop" role="button" matTooltip="Undo" matTooltipPosition='below'></div>
+            <div class="redo prop" role="button" matTooltip="Redo" matTooltipPosition='below'></div>
+        </div>
+        <div class="close-note" >
+            Close
+        </div>
+    </div>
+</mat-card>
+
+</div>
+<div *ngIf="updating" (click)="UpdateNote()" id="block" class="block" #updateNote></div>
+  
+        <!-- <div *ngIf="!shouldRun">Please open on Stackblitz to see result</div> -->
+
