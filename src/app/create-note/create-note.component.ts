@@ -11,8 +11,7 @@ import {NoteServiceService} from '../Services/Noteservice/note-service.service';
 export class CreateNoteComponent implements OnInit, AfterViewInit  {
   pin : boolean = false;
   Edit : boolean = false;
-
-
+  @Output() messageEvent = new EventEmitter<any>();
   // Data exchange from child to parent
   // @Output() messageEvent = new EventEmitter<string>();
 
@@ -46,13 +45,16 @@ export class CreateNoteComponent implements OnInit, AfterViewInit  {
       this.noteService.addNote(reqData).subscribe(
         (response: any) => {
         console.log(response);
-          // this.messageEvent.emit()
+        
+    
+          
       });;
     }
     this.pin = false
   }
 
   ngAfterViewInit() {
+    
   }
 
   ngOnInit(): void {

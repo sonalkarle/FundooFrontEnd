@@ -25,8 +25,9 @@ export class DashboardComponent implements OnInit,AfterViewInit, OnChanges {
   more : boolean = false;
   deleteNoteId: number = 0;
   prevNoteID : number = 0;
+  parentMessage = this.loadActiveNotes();
 
-  fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
+  // fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
   private _mobileQueryListener: () => void;
 
 
@@ -68,7 +69,7 @@ export class DashboardComponent implements OnInit,AfterViewInit, OnChanges {
 
   ngOnInit(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
-
+     this.parentMessage;
     this.loadActiveNotes();   
   }
   deleteNote(){
@@ -91,6 +92,9 @@ export class DashboardComponent implements OnInit,AfterViewInit, OnChanges {
   }
   receiveMessage($event: any) {
     this.loadActiveNotes();
+  }
+  receiveMoreEvent($event: any) {
+    this.deleteNoteId= $event;
   }
   receiveNoteMessage($event: any) {
     this.updateNote = $event

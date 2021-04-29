@@ -2,7 +2,7 @@
     <mat-card [id]="'note-'+childMessage.noteId" class="note-d note-before" ng-class="">
         <div id="dntn" class="nd" (click)="updateNoteProcess()" >
             <div id="title" #title  contenteditable="false" aria-multiline="true" role="textbox" class="t n1" dir="ltr">{{ childMessage['title'] }}</div>
-            <div id="note" contenteditable="false" aria-multiline="true" role="textbox" class="n n1" >{{ childMessage['text'] }}</div>
+            <div id="note" contenteditable="false" aria-multiline="true" role="textbox" class="n n1" >{{ childMessage['body'] }}</div>
             
         </div>
         <div class="bot">

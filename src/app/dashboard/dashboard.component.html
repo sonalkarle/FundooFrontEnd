@@ -3,7 +3,7 @@
   <mat-toolbar >
       <mat-toolbar-row style="background-color: white;">
         <button mat-icon-button>
-          <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+          <mat-icon (click)="sidenav.toggle()" style="margin-left:10%">menu </mat-icon>
         </button>
         <!-- <hr style=" top: 56.5px; position: absolute; "  size="0"  width="105%" color="grey"> -->
 
@@ -74,7 +74,10 @@
 
     <!-- Communication between child(note.component) and parent  -->
     <div class="note-create">
-      <app-create-note  ></app-create-note>
+      <div>
+        <app-create-note (messageEvent)="receiveMessage($event)" ></app-create-note>
+      </div>
+        
     </div>
 
 
@@ -83,7 +86,7 @@
  <!-- Communication between child(displaynote.component) and parent  -->
     <div class="out">
       <div class="display-notes">
-        <app-display-notes (messageEvent)="receiveMessage($event)"   (messageEvent)="receiveNoteMessage($event)" *ngFor="let content of notes" [childMessage]="content" [id]="'notes'+content['noteId']"></app-display-notes>
+        <app-display-notes (moreEvent)="receiveMoreEvent($event)"  (messageEvent)="receiveNoteMessage($event)" *ngFor="let content of notes" [childMessage]="content" [id]="'notes'+content['noteId']"></app-display-notes>
         <mat-card *ngIf="more" [style.top.px]="top" [style.left.px]="left" class="moremenu" aria-hidden="false" role="menu" aria-haspopup="true" tabindex="0">
           <div class="delete-more menu-more" (click)="deleteNote()" role="menuitem" id=":1" style="user-select: none;">
               <div class="menu-list delete-note" style="user-select: none;">Delete note</div>
@@ -127,6 +130,6 @@
 
 </div>
 <div *ngIf="updating" (click)="UpdateNote()" id="block" class="block" #updateNote></div>
-  
+
         <!-- <div *ngIf="!shouldRun">Please open on Stackblitz to see result</div> -->
 
